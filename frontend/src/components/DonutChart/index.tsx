@@ -12,17 +12,17 @@ type ChartData = {
 
 const DonutChart = () => {
 
-    const [chartData, setChartData] = useState<ChartData>({ labels: [], series: []});
+    const [chartData, setChartData] = useState<ChartData>({ labels: [], series: [] });
 
     useEffect(() => {
         axios.get(BASE_URL + '/sales/sum-by-seller')
-        .then(response => {
-            const data = response.data as SaleSum[];
-            const myLabels = data.map(x => x.sellerName);
-            const mySeries = data.map(x => x.sum);
+            .then(response => {
+                const data = response.data as SaleSum[];
+                const myLabels = data.map(x => x.sellerName);
+                const mySeries = data.map(x => x.sum);
 
-            setChartData({ labels: myLabels, series: mySeries});
-        });
+                setChartData({ labels: myLabels, series: mySeries });
+            });
     }, []);
 
     //const mockData = {
@@ -35,10 +35,10 @@ const DonutChart = () => {
             show: true
         }
     }
-  
+
     return (
         <Chart
-            options={{ ...options, labels: chartData.labels}}
+            options={{ ...options, labels: chartData.labels }}
             series={chartData.series}
             type="donut"
             height="240"
